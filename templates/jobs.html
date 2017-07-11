@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Tables</title>
+</head>
+<body>
+<header>
+    <div class="nav">
+      <ul class="menu">
+        <li><a href=#>Queries</a>
+        <ul class="submenu">
+            <li><a href="personneldep">Personnel department</a></li>
+            <li><a href="restmenu">Restaurant menu</a></li>
+            <li><a href="orderqueue">Restaurant orders</a></li>
+        </ul>
+    </li>
+    <li><a href=#>Tables</a>
+        <ul class="submenu">
+            <li><a href="jobs">Jobs</a></li>
+            <li><a href="workers">Workers</a></li>
+            <li><a href="storage">Storage</a></li>
+            <li><a href="menu">Menu</a></li>
+            <li><a href="order">Orders</a></li>
+        </ul>
+    </li>
+    <li><a href="index">Main</a></li>
+</ul>
+    </div>
+  </header>
+<H1>Jobs</H1><HR>
+<table width=100%>
+    {% for job in jobs %}
+        <tr>
+            <td>Job: {{job.jobname}}</td>
+            <td>Job salary: {{job.jobsalary}}</td>
+            <td>What to do: {{job.jobtodo}}</td>
+            <td style="border-right:None">Rules: {{job.jobrules}}</td>
+        </tr>
+    {% endfor %}
+</table>
+<hr>
+<div style="width:100%;">
+<form method="POST" style="width:500px;display: inline-block; margin-left: 20px;padding-left: 10px;"> {% csrf_token %}
+    {%for field in form%}
+        <label class="control-label">{{field.label_tag}}</label>
+        <div style="padding-bottom:8px">{{field}}</div>
+    {%endfor%}
+    <button type="submit" name="Add">Add</button> </form>
+<form method="GET" style="width:500px;display: inline-block; position: absolute">
+    <label>Job</label><br>
+    <select name="jobname" required="" style="margin-bottom:8px; padding-bottom:2px">
+        {% for jobname in jobnames %}
+            <option>{{jobname}}</option>
+        {%endfor%}
+    </select><br>
+    <button type="submit" name="Delete" >Delete</button> </form>
+</div>
+</body>
+</html>

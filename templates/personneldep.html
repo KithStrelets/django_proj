@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Queries</title>
+</head>
+<body>
+<header>
+    <div class="nav">
+      <ul class="menu">
+        <li><a href=#>Queries</a>
+        <ul class="submenu">
+            <li><a href="personneldep">Personnel department</a></li>
+            <li><a href="restmenu">Restaurant menu</a></li>
+            <li><a href="orderqueue">Restaurant orders</a></li>
+        </ul>
+    </li>
+    <li><a href=#>Tables</a>
+        <ul class="submenu">
+            <li><a href="jobs">Jobs</a></li>
+            <li><a href="workers">Workers</a></li>
+            <li><a href="storage">Storage</a></li>
+            <li><a href="menu">Menu</a></li>
+            <li><a href="order">Orders</a></li>
+        </ul>
+    </li>
+    <li><a href="index">Main</a></li>
+</ul>
+    </div>
+  </header>
+<H1>Personnel department</H1><HR>
+<table width=100%>
+    {% for person in personnel %}
+        <tr>
+            <td>Worker's name: {{person.workername}}</td>
+            <td>Age: {{person.workerage}}</td>
+            <td>Gender: {{person.workergender}}</td>
+            <td>Address: {{person.workeraddress}}</td>
+            <td>Passport: {{person.workerpass}}</td>
+            <td style="border-right:None">Job: {{person.workerjob}}</td>
+
+        </tr>
+    {% endfor %}
+</table>
+    <hr></HR>
+
+
+<div style="width:100%;margin-left: 20px;">
+    <label>Sort by:</label><br>
+<form method="GET" style="width:500px;display: inline-block; position: absolute;margin-top: 5px;">
+    <select id="id_orderworker" name="orderby" required="">
+        {% for field in fields %}
+        <option value="{{field.name}}">{{field.verbose_name}}</option>
+
+        {%endfor%}
+    </select>
+    <button type="submit">Sort</button> </form>
+</div>
+</body>
+</html>

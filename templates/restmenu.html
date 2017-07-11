@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Queries</title>
+</head>
+<body>
+<header>
+    <div class="nav">
+      <ul class="menu">
+        <li><a href=#>Queries</a>
+        <ul class="submenu">
+            <li><a href="personneldep">Personnel department</a></li>
+            <li><a href="restmenu">Restaurant menu</a></li>
+            <li><a href="orderqueue">Restaurant orders</a></li>
+        </ul>
+    </li>
+    <li><a href=#>Tables</a>
+        <ul class="submenu">
+            <li><a href="jobs">Jobs</a></li>
+            <li><a href="workers">Workers</a></li>
+            <li><a href="storage">Storage</a></li>
+            <li><a href="menu">Menu</a></li>
+            <li><a href="order">Orders</a></li>
+        </ul>
+    </li>
+    <li><a href="index">Main</a></li>
+</ul>
+    </div>
+  </header>
+<H1>Restaurant menu</H1><HR>
+<table width=100%>
+    {% for dish in menu %}
+        <tr>
+            <td>Dish: {{dish.menuname}}</td>
+            <td>First ingredient: {{dish.idfirstitem}}</td>
+            <td>Value 1st: {{dish.firstitemvalue}}</td>
+            <td>Second ingredient: {{dish.idsecondtitem}}</td>
+            <td>Value 2nd: {{dish.seconditemvalue}}</td>
+            <td>Third ingredient: {{dish.idthirdtitem}}</td>
+            <td>Value 3rd: {{dish.thirditemvalue}}</td>
+            <td>Price: {{dish.price}}</td>
+            <td style="border-right:None">Cook time: {{dish.cooktime}}</td>
+
+        </tr>
+    {% endfor %}
+</table>
+<hr>
+
+
+<div style="width:100%;margin-left: 20px;">
+    <label>First ingredient provider:</label><br>
+<form method="GET" style="width:500px;display: inline-block; position: absolute; margin-top: 5px">
+    <select id="id_orderfirstdish" name="orderby" required="">
+        <option>all</option>
+        {% for field in fields %}
+            <option>{{field}}</option>
+        {%endfor%}
+    </select>
+    <button type="submit">Show</button> </form>
+</div>
+</body>
+</html>

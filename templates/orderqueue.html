@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Queries</title>
+</head>
+<body>
+<header>
+    <div class="nav">
+      <ul class="menu">
+        <li><a href=#>Queries</a>
+        <ul class="submenu">
+            <li><a href="personneldep">Personnel department</a></li>
+            <li><a href="restmenu">Restaurant menu</a></li>
+            <li><a href="orderqueue">Restaurant orders</a></li>
+        </ul>
+    </li>
+    <li><a href=#>Tables</a>
+        <ul class="submenu">
+            <li><a href="jobs">Jobs</a></li>
+            <li><a href="workers">Workers</a></li>
+            <li><a href="storage">Storage</a></li>
+            <li><a href="menu">Menu</a></li>
+            <li><a href="order">Orders</a></li>
+        </ul>
+    </li>
+    <li><a href="index">Main</a></li>
+</ul>
+    </div>
+  </header>
+<H1>Restaurant orders</H1><HR>
+<table width=100%>
+    {% for order in orders %}
+        <tr>
+            <td style="width:80px">Order datetime: {{order.orderdatetime}}</td>
+            <td>Customer: {{order.ordername}}</td>
+            <td>Customer's phone: {{order.orderphone}}</td>
+            <td>First dish: {{order.orderfirstdish}}</td>
+            <td>Second dish: {{order.orderseconddish}}</td>
+            <td>Third dish: {{order.orderthirddish}}</td>
+            <td>Total price: {{order.orderprice}}</td>
+            <td>Status: {{order.ordercomplete}}</td>
+            <td style="border-right: None; width:90px">Order waiter: {{order.orderworker}}</td>
+
+        </tr>
+    {% endfor %}
+</table>
+<hr>
+<div style="width:100%;margin-left: 20px;">
+    <label>Order status:</label><br>
+<form method="GET" style="width:500px;display: inline-block; position: absolute;margin-top: 5px;">
+    <select id="id_orderfirstdish" name="orderby" required="">
+            <option>all</option>
+            <option>accomplished</option>
+            <option>unaccomplished</option>
+
+    </select>
+    <button type="submit">Show</button> </form>
+</div>
+</body>
+</html>
